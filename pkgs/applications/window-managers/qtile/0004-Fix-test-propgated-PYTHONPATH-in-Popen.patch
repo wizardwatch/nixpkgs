@@ -28,8 +28,8 @@ diff --color -ur a/test/conftest.py b/test/conftest.py
              nonlocal proc
 -            proc = subprocess.Popen(args, env={"DISPLAY": self.display})
 +            pythonpath=os.environ["PYTHONPATH"]
-+            print("lol pythonpath : {pythonpath}")
-+            proc = subprocess.Popen(args, env={"DISPLAY": self.display, "PYTHONPATH":pythonpath})
++            print("lol pythonpath : " + pythonpath)
++            proc = subprocess.Popen(args, env={"DISPLAY": self.display, "PYTHONPATH": pythonpath})
  
          def failed():
 -            if proc.poll() is not None:

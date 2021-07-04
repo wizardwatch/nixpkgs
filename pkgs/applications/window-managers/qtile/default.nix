@@ -21,7 +21,12 @@
 , setuptools_scm
 , xcbutilcursor
 , xcffib
-
+# edited
+, librsvg
+, lm_sensors
+, fontconfig
+, python-fontconfig
+#
 , dbus
 , pytest
 , xcalc
@@ -37,8 +42,7 @@ let cairocffi-xcffib = cairocffi.override {
 in
 buildPythonApplication rec {
   name = "qtile-${version}";
-  version = "0.17.0";
-
+  version = "0.18.0";
   src = fetchFromGitHub {
     owner = "qtile";
     repo = "qtile";
@@ -63,9 +67,12 @@ buildPythonApplication rec {
 
   SETUPTOOLS_SCM_PRETEND_VERSION = version;
 
-  nativeBuildInputs = [ pkg-config wrapGAppsHook ];
-  buildInputs = [ glib libxcb cairo pango xcffib libpulseaudio ];
+  nativeBuildInputs = [ pkg-config wrapGAppsHook lm_sensors fontconfig];
+  buildInputs = [ glib libxcb cairo pango xcffib libpulseaudio fontconfig lm_sensors python-fontconfig];
   propagatedBuildInputs = [
+    # edited
+    librsvg
+    #
     cairocffi-xcffib
     dateutil
     dbus-python
@@ -111,7 +118,9 @@ buildPythonApplication rec {
     export HOME=$(pwd)
     export XDG_CACHE_HOME="$(pwd)/cache"
     export SCREEN_SIZE=1920x1080
-    xvfb-run -s '-screen 0 800x600x24' dbus-run-session \
+    export FONTCONFIG_PATH=/etc/fonts
+    export FONTCONFIG_FILE=/etc/fonts/fonts.conf
+    xvfb-run -s '-screen 0 1920x1080x24' dbus-run-session \
       --config-file=${dbus.daemon}/share/dbus-1/session.conf \
      ./scripts/xephyr &
     pytest
