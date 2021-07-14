@@ -7860,6 +7860,8 @@ in
 
   pywal = with python3Packages; toPythonApplication pywal;
 
+  pywayland = with python39Packages; callPackage ../development/python-modules/pywayland { };
+ 
   rbw = callPackage ../tools/security/rbw {
     inherit (darwin.apple_sdk.frameworks) Security;
   };
@@ -13331,6 +13333,8 @@ in
     inherit (dotnetPackages) Nuget;
   };
 
+  python-xkbcommon = with python39Packages; callPackage ../development/python-modules/python-xkbcommon { };
+  
   minify = callPackage ../development/web/minify { };
 
   minizinc = callPackage ../development/tools/minizinc { };
