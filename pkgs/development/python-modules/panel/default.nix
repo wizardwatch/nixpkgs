@@ -17,7 +17,7 @@ let
 in
 buildPythonPackage rec {
   pname = "panel";
-  version = "0.12.1";
+  version = "0.12.4";
 
   # Don't forget to also update the node packages
   # 1. retrieve the package.json file
@@ -25,7 +25,7 @@ buildPythonPackage rec {
   # 3. node2nix
   src = fetchPypi {
     inherit pname version;
-    sha256 = "e4898d60abdb82f8a429df7f59dbf8bcaf7e19b3e633555512ceb4ce06678458";
+    sha256 = "e1dbe5c06d3f87de139b531b0eec4c5554eab7629230ab1455e078e6d1c5af89";
   };
 
   # Since 0.10.0 panel attempts to fetch from the web.
